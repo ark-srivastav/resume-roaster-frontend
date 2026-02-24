@@ -1,38 +1,66 @@
-.App {
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f0f;
+  color: #f0f0f0;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 60px 20px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 { font-size: 2.5rem; margin-bottom: 10px; }
+
+.subtitle { color: #888; margin-bottom: 40px; }
+
+.dropzone {
+  border: 2px dashed #444;
+  border-radius: 12px;
+  padding: 60px 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 20px;
+  color: #888;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+.dropzone:hover, .dropzone.dragging { border-color: #ff4500; color: #ff4500; }
+.dropzone.has-file { border-color: #22c55e; color: #22c55e; }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+button {
+  background: #ff4500;
   color: white;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover:not(:disabled) { background: #e03d00; }
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.roast-output {
+  margin-top: 40px;
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.roast-output pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  line-height: 1.7;
+  font-family: inherit;
+}
+.size-hint {
+  color: #555;
+  font-size: 0.8rem;
+  margin-bottom: 20px;
 }
