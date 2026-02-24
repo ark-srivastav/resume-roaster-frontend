@@ -64,6 +64,7 @@ export default function App() {
   const [dragging, setDragging] = useState(false);
   const [error, setError] = useState("");
   const roastRef = useRef(null);
+  const [isPaid, setIsPaid] = useState(false);
 
   useEffect(() => {
     if (roast && roastRef.current) {
@@ -112,6 +113,75 @@ export default function App() {
     setLoading(false);
   };
 
+  const handlePayment = () => {
+    const options = {
+      key: process.env.REACT_APP_RAZORPAY_KEY,
+      amount: 100, // amount in paise, 1000 = ₹10
+      currency: "INR",
+      name: "Resume Roaster",
+      description: "Get your resume roasted 🔥",
+      image: "https://roaster.ark-srivastav.net/panda.ico",
+      handler: function (response) {
+        console.log("Payment success:", response);
+        setIsPaid(true);
+      },
+      prefill: {
+        name: "",
+        email: "",
+        contact: "",
+      },
+      theme: {
+        color: "#7c3aed",
+      },
+    };
+
+    const razor = new window.Razorpay(options);
+    razor.open();
+  };
+
+  if (!isPaid) {
+    return (
+      <div className="app">
+        <div className="bg-orbs">
+          <div className="orb orb1" />
+          <div className="orb orb2" />
+          <div className="orb orb3" />
+        </div>
+        <div className="container">
+          <header className="header">
+            <div className="logo">🔥</div>
+            <h1>Resume Roaster</h1>
+            <p className="tagline">
+              Get roasted by AI. Desi style. <span className="tag">Not fuckin free</span>
+            </p>
+          </header>
+
+          <div className="card" style={{ textAlign: "center", padding: "48px 32px" }}>
+            <p style={{ fontSize: "3rem", marginBottom: "16px" }}>🌶️</p>
+            <h2 style={{ fontFamily: "Syne, sans-serif", color: "var(--purple)", marginBottom: "12px", fontSize: "1.6rem" }}>
+              Ready to get roasted?
+            </h2>
+            <p style={{ color: "var(--text-soft)", marginBottom: "8px", fontWeight: 600 }}>
+              Upload your resume and get a savage, desi-style roast powered by AI.
+            </p>
+            <p style={{ color: "var(--text-soft)", marginBottom: "32px", fontSize: "0.9rem" }}>
+              2 roasts per payment · Instant access · No signup needed
+            </p>
+            <button className="roast-btn" onClick={handlePayment}>
+              Pay ₹1 to Get Roasted 🔥
+            </button>
+            <p style={{ marginTop: "16px", fontSize: "0.8rem", color: "var(--text-soft)" }}>
+              Secured by Razorpay · UPI, Cards, Netbanking accepted
+            </p>
+          </div>
+
+          <footer className="footer">
+            <p>Built with 💜 by <a href="https://ark-srivastav.net" target="_blank" rel="noreferrer">Ark Srivastav</a></p>
+          </footer>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="app">
       <div className="bg-orbs">
