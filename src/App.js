@@ -34,7 +34,7 @@ const handleFile = (f) => {
     const formData = new FormData();
     formData.append("file", file);
     try {
-      const res = await axios.post(`${process.env.ROASTER_BACKEND_API_URL}/roast`, formData);
+      const res = await axios.post(`${process.env.REACT_APP_ROASTER_BACKEND_API_URL}/roast`, formData);
 
       setRoast(res.data.roast);
     } catch (err) {
