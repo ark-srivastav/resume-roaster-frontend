@@ -37,7 +37,7 @@ function QuoteLoader() {
         setIndex((prev) => (prev + 1) % QUOTES.length);
         setFade(true);
       }, 400);
-    }, 3500);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
